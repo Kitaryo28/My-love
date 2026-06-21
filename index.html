@@ -22,29 +22,35 @@ font-family:'Poppins',sans-serif;
 
 body{
 min-height:100vh;
+padding:20px 0;
+
 display:flex;
 justify-content:center;
-align-items:center;
-overflow:hidden;
+align-items:flex-start;
+
+overflow-y:auto;
+overflow-x:hidden;
+
 position:relative;
-color:white;
 
 background:
 linear-gradient(
-rgba(8,8,15,.65),
-rgba(8,8,15,.85)
+rgba(10,10,20,.65),
+rgba(10,10,20,.85)
 ),
 url("https://i.postimg.cc/GhVC12QK/Picsart-26-06-21-22-07-31-554.png");
 
 background-size:cover;
 background-position:center;
+
+color:white;
 }
 
-/* Glow Effect */
+/* White Glow */
 
 body::before{
 content:"";
-position:absolute;
+position:fixed;
 inset:0;
 
 background:
@@ -63,20 +69,30 @@ pointer-events:none;
 position:fixed;
 width:12px;
 height:12px;
+
 background:#ff6b9d;
+
 transform:rotate(45deg);
+
 opacity:.25;
+
 pointer-events:none;
+
 animation:float 8s linear infinite;
 }
 
 .heart::before,
 .heart::after{
+
 content:"";
+
 position:absolute;
+
 width:12px;
 height:12px;
+
 background:#ff6b9d;
+
 border-radius:50%;
 }
 
@@ -109,17 +125,17 @@ rotate(45deg);
 .container{
 width:100%;
 max-width:430px;
-padding:20px;
-position:relative;
+padding:15px;
 z-index:2;
 }
 
 .card{
+
 background:
 rgba(255,255,255,.08);
 
 backdrop-filter:
-blur(18px);
+blur(16px);
 
 border:
 1px solid rgba(255,255,255,.12);
@@ -154,12 +170,14 @@ font-weight:600;
 
 .cover p{
 font-size:13px;
-opacity:.85;
+opacity:.8;
 margin-top:5px;
 }
 
 .input{
+
 width:100%;
+
 margin-top:20px;
 
 padding:14px;
@@ -174,8 +192,8 @@ rgba(255,255,255,.12);
 
 color:white;
 
-font-size:15px;
 text-align:center;
+font-size:15px;
 }
 
 .input::placeholder{
@@ -184,18 +202,19 @@ rgba(255,255,255,.65);
 }
 
 .btn{
+
 width:100%;
+
 margin-top:12px;
 
 padding:14px;
 
 border:none;
 
-cursor:pointer;
-
 border-radius:12px;
 
-font-size:15px;
+cursor:pointer;
+
 font-weight:600;
 
 background:
@@ -206,13 +225,10 @@ linear-gradient(
 );
 
 color:white;
-
-transition:.3s;
 }
 
 .btn:hover{
-transform:
-translateY(-2px);
+transform:translateY(-2px);
 }
 
 .hint{
@@ -237,23 +253,16 @@ margin:auto;
 
 border-radius:50%;
 
-border:
-3px solid rgba(255,255,255,.2);
+border:3px solid rgba(255,255,255,.2);
+border-top:3px solid white;
 
-border-top:
-3px solid white;
-
-animation:
-spin 1s linear infinite;
+animation:spin 1s linear infinite;
 }
 
 @keyframes spin{
-
 100%{
-transform:
-rotate(360deg);
+transform:rotate(360deg);
 }
-
 }
 
 .loading p{
@@ -261,7 +270,7 @@ margin-top:12px;
 font-size:14px;
 }
 
-  /* MAIL SCREEN */
+/* LETTER SCREEN */
 
 .mail-header{
 margin-bottom:15px;
@@ -282,8 +291,12 @@ color:#ffd6e3;
 white-space:pre-wrap;
 line-height:1.8;
 font-size:14px;
-min-height:280px;
 margin-top:10px;
+
+/* Scroll Fix */
+max-height:420px;
+overflow-y:auto;
+padding-right:5px;
 }
 
 .ask{
@@ -304,6 +317,7 @@ margin-bottom:12px;
 display:flex;
 justify-content:center;
 gap:10px;
+flex-wrap:wrap;
 }
 
 .yes-btn,
@@ -311,8 +325,8 @@ gap:10px;
 padding:10px 20px;
 border:none;
 border-radius:30px;
-font-weight:600;
 cursor:pointer;
+font-weight:600;
 }
 
 .yes-btn{
@@ -341,32 +355,23 @@ color:#ffd6e3;
 
 <div class="container">
 
-<!-- Loading Screen -->
+<!-- Loading -->
 
 <div id="loadingScreen" class="card hidden">
-
 <div class="loading">
-
 <div class="spinner"></div>
-
 <p>☕💕 Loading your letter...</p>
-
+</div>
 </div>
 
-</div>
-
-<!-- Password Screen -->
+<!-- Password -->
 
 <div id="lockScreen" class="card">
 
 <div class="cover">
-
 <div class="emoji">☕💕</div>
-
 <h1>Private Love Mail</h1>
-
 <p>Only for Darling ♡</p>
-
 </div>
 
 <input
@@ -379,24 +384,18 @@ autocomplete="off"
 <button
 class="btn"
 onclick="openMail()">
-
 ✨ Open My Heart
-
 </button>
 
 <div class="hint">
-
 💌 Hint: three magical words
-
 </div>
 
 </div>
 
-<!-- Letter Screen -->
+<!-- Letter -->
 
-<div
-id="mailScreen"
-class="card hidden">
+<div id="mailScreen" class="card hidden">
 
 <div class="mail-header">
 
@@ -405,24 +404,17 @@ class="card hidden">
 </div>
 
 <div class="to">
-<b>To:</b> Darling 💑
+<b>To:</b> Darling 💕
 </div>
 
 </div>
 
-<div
-id="letter"
-class="letter">
-</div>
+<div id="letter" class="letter"></div>
 
-<div
-id="askBox"
-class="ask hidden">
+<div id="askBox" class="ask hidden">
 
 <div class="question">
-
 Are you still love me if I became stone? 🪨💖
-
 </div>
 
 <div class="buttons">
@@ -430,17 +422,13 @@ Are you still love me if I became stone? 🪨💖
 <button
 class="yes-btn"
 onclick="sayYes()">
-
 Yes ♡
-
 </button>
 
 <button
 class="no-btn"
 id="noBtn">
-
 No
-
 </button>
 
 </div>
