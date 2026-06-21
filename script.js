@@ -1,81 +1,81 @@
 // ======================
-// SETTINGS
+// PASSWORD
 // ======================
 
 const PASSWORD = "i love you";
 
-const LETTER = [
+// ======================
+// LOVE LETTER
+// ======================
 
-`Hey Darling ☕,
+const LETTER = `Hey Darling ☕,
 
 Sometimes I wonder how someone can become so important without even trying.
 
-Yet somehow...
-you did.`,
+Yet somehow... you did.
 
-`You became the reason I smile at random moments,
+You became the reason I smile at random moments,
 and the reason ordinary days feel special.
 
 Even on the busiest days,
-your thoughts find a way back to me.`,
+your thoughts find a way back to me.
 
-`Whenever life feels heavy,
+Whenever life feels heavy,
 thinking about you makes everything feel lighter.
 
 Like a warm cup of coffee
-on a cold evening.`,
+on a peaceful evening.
 
-`You are not just someone I care about.
+You are not just someone I care about.
 
 You became a part of my favourite memories,
 my comfort,
-and my happiest thoughts.`,
+and my happiest thoughts.
 
-`If I could choose one place to stay forever,
+If I could choose one place to stay forever,
 
 it would be somewhere beside you,
 watching the sky,
 sharing coffee,
-and talking about absolutely nothing.`,
+and talking about absolutely nothing.
 
-`And even if one day I became stone 🪨,
+And even if one day I became stone 🪨,
 
 unable to move,
 unable to speak,
 
-my feelings would still stay exactly the same.`,
+my feelings would still stay exactly the same.
 
-`Because some hearts never stop loving.
+Because some hearts never stop loving.
 
 They simply keep loving quietly forever.
 
-— Kitaryo ♡`
-];
+— Kitaryo ♡`;
 
 // ======================
-// FLOATING HEARTS
+// HEARTS
 // ======================
 
-const heartsContainer = document.getElementById("hearts");
+window.onload = () => {
 
-for(let i = 0; i < 20; i++){
+    for(let i = 0; i < 20; i++){
 
-const heart = document.createElement("div");
+        const heart =
+        document.createElement("div");
 
-heart.className = "heart";
+        heart.className = "heart";
 
-heart.style.left =
-Math.random() * 100 + "vw";
+        heart.style.left =
+        Math.random() * 100 + "vw";
 
-heart.style.animationDuration =
-(5 + Math.random() * 5) + "s";
+        heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
 
-heart.style.opacity =
-Math.random() * 0.4;
+        document.body.appendChild(heart);
+    }
 
-document.body.appendChild(heart);
-
-}
+    setupNoButton();
+};
 
 // ======================
 // OPEN MAIL
@@ -83,124 +83,80 @@ document.body.appendChild(heart);
 
 function openMail(){
 
-const input =
-document.getElementById("password");
+    const value =
+    document
+    .getElementById("password")
+    .value
+    .trim()
+    .toLowerCase();
 
-const value =
-input.value.trim().toLowerCase();
+    if(value !== PASSWORD){
 
-if(value !== PASSWORD){
+        alert("💔 Wrong Password");
+        return;
+    }
 
-input.style.border =
-"2px solid #ff5b8a";
+    document
+    .getElementById("lockScreen")
+    .classList
+    .add("hidden");
 
-setTimeout(()=>{
-input.style.border = "none";
-},600);
+    document
+    .getElementById("loadingScreen")
+    .classList
+    .remove("hidden");
 
-return;
+    setTimeout(() => {
 
+        document
+        .getElementById("loadingScreen")
+        .classList
+        .add("hidden");
+
+        document
+        .getElementById("mailScreen")
+        .classList
+        .remove("hidden");
+
+        startTyping();
+
+    }, 1800);
 }
-
-// hide password
-document
-.getElementById("lockScreen")
-.classList.add("hidden");
-
-// loading screen
-document
-.getElementById("loadingScreen")
-.classList.remove("hidden");
-
-// fake loading
-setTimeout(()=>{
-
-document
-.getElementById("loadingScreen")
-.classList.add("hidden");
-
-document
-.getElementById("mailScreen")
-.classList.remove("hidden");
-
-typeLetter();
-
-},1800);
-
-}
-
-// enter key support
-document.addEventListener("keydown",e=>{
-
-if(e.key==="Enter"){
-
-const lock =
-document.getElementById("lockScreen");
-
-if(!lock.classList.contains("hidden")){
-openMail();
-}
-
-}
-
-});
 
 // ======================
 // TYPEWRITER
 // ======================
 
-let paragraph = 0;
-let charIndex = 0;
+function startTyping(){
 
-function typeLetter(){
+    const letter =
+    document.getElementById("letter");
 
-const letter =
-document.getElementById("letter");
+    letter.textContent = "";
 
-letter.textContent = "";
+    let i = 0;
 
-paragraph = 0;
-charIndex = 0;
+    const speed = 15;
 
-typeNext();
+    const typing =
+    setInterval(() => {
 
-}
+        letter.textContent +=
+        LETTER.charAt(i);
 
-function typeNext(){
+        i++;
 
-const letter =
-document.getElementById("letter");
+        if(i >= LETTER.length){
 
-if(paragraph >= LETTER.length){
+            clearInterval(typing);
 
-document
-.getElementById("askBox")
-.classList.remove("hidden");
+            document
+            .getElementById("askBox")
+            .classList
+            .remove("hidden");
+        }
 
-return;
-
-}
-
-if(charIndex < LETTER[paragraph].length){
-
-letter.textContent +=
-LETTER[paragraph][charIndex];
-
-charIndex++;
-
-setTimeout(typeNext,25);
-
-}else{
-
-letter.textContent += "\n\n";
-
-paragraph++;
-charIndex = 0;
-
-setTimeout(typeNext,500);
-
-}
-
+    }, speed);
 }
 
 // ======================
@@ -209,61 +165,66 @@ setTimeout(typeNext,500);
 
 function sayYes(){
 
-document
-.getElementById("askBox")
-.classList.add("hidden");
+    document
+    .getElementById("askBox")
+    .classList
+    .add("hidden");
 
-const box =
-document.getElementById("replyBox");
+    const box =
+    document.getElementById("replyBox");
 
-box.innerHTML = `
+    box.innerHTML = `
+    💖 Darling,<br><br>
 
-💖 Darling,
+    You just made this letter complete.<br><br>
 
-You just made this letter complete.
+    Even if time stopped,<br>
+    even if the stars disappeared,<br><br>
 
-Even if time stopped,
-even if the stars disappeared,
+    I would still choose you.<br><br>
 
-I would still choose you.
+    ☕💑 Forever & Always ♡
+    `;
 
-☕💑 Forever and Always ♡
-
-`;
-
-box.classList.remove("hidden");
-
+    box.classList.remove("hidden");
 }
 
 // ======================
-// RUNAWAY NO BUTTON
+// NO BUTTON RUNAWAY
 // ======================
 
-const noBtn =
-document.getElementById("noBtn");
+function setupNoButton(){
 
-function moveButton(){
+    const noBtn =
+    document.getElementById("noBtn");
 
-const x =
-(Math.random() * 180) - 90;
+    if(!noBtn) return;
 
-const y =
-(Math.random() * 80) - 40;
+    function moveButton(){
 
-noBtn.style.transform =
-`translate(${x}px, ${y}px)`;
+        const x =
+        (Math.random() * 180) - 90;
 
-noBtn.style.transition =
-".2s ease";
+        const y =
+        (Math.random() * 80) - 40;
 
+        noBtn.style.transform =
+        `translate(${x}px, ${y}px)`;
+
+        noBtn.style.transition =
+        ".2s ease";
+    }
+
+    noBtn.addEventListener(
+        "mouseenter",
+        moveButton
+    );
+
+    noBtn.addEventListener(
+        "touchstart",
+        moveButton
+    );
 }
 
-noBtn.addEventListener(
-"mouseover",
-moveButton
-);
-
-noBtn.addEventListener(
-"touchstart",
-moveButton
-);
+// ======================
+// ENTER
