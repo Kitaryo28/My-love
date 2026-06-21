@@ -1,43 +1,41 @@
-// ======================
+// =======================
 // PASSWORD
-// ======================
+// =======================
 
 const PASSWORD = "i love you";
 
-// ======================
-// LOVE LETTER
-// ======================
+// =======================
+// LETTER
+// =======================
 
 const LETTER = `Hey Darling ☕,
 
 Sometimes I wonder how someone can become so important without even trying.
 
-Yet somehow... you did.
+Yet somehow, you did.
 
 You became the reason I smile at random moments,
-and the reason ordinary days feel special.
-
-Even on the busiest days,
-your thoughts find a way back to me.
+the reason ordinary days feel special,
+and the reason my heart feels warm even on difficult days.
 
 Whenever life feels heavy,
 thinking about you makes everything feel lighter.
 
-Like a warm cup of coffee
-on a peaceful evening.
+Like a warm coffee on a rainy evening,
+your presence brings comfort I never knew I needed.
 
 You are not just someone I care about.
 
 You became a part of my favourite memories,
-my comfort,
-and my happiest thoughts.
+my happiest thoughts,
+and the little dreams I keep close to my heart.
 
 If I could choose one place to stay forever,
 
 it would be somewhere beside you,
 watching the sky,
 sharing coffee,
-and talking about absolutely nothing.
+and laughing about absolutely nothing.
 
 And even if one day I became stone 🪨,
 
@@ -52,18 +50,17 @@ They simply keep loving quietly forever.
 
 — Kitaryo ♡`;
 
-// ======================
-// HEARTS
-// ======================
+// =======================
+// FLOATING HEARTS
+// =======================
 
 window.onload = () => {
 
     for(let i = 0; i < 20; i++){
 
-        const heart =
-        document.createElement("div");
+        const heart = document.createElement("div");
 
-        heart.className = "heart";
+        heart.classList.add("heart");
 
         heart.style.left =
         Math.random() * 100 + "vw";
@@ -77,15 +74,14 @@ window.onload = () => {
     setupNoButton();
 };
 
-// ======================
+// =======================
 // OPEN MAIL
-// ======================
+// =======================
 
 function openMail(){
 
     const value =
-    document
-    .getElementById("password")
+    document.getElementById("password")
     .value
     .trim()
     .toLowerCase();
@@ -123,9 +119,9 @@ function openMail(){
     }, 1800);
 }
 
-// ======================
+// =======================
 // TYPEWRITER
-// ======================
+// =======================
 
 function startTyping(){
 
@@ -138,11 +134,14 @@ function startTyping(){
 
     const speed = 15;
 
-    const typing =
-    setInterval(() => {
+    const typing = setInterval(() => {
 
         letter.textContent +=
         LETTER.charAt(i);
+
+        // Auto scroll while typing
+        letter.scrollTop =
+        letter.scrollHeight;
 
         i++;
 
@@ -154,14 +153,17 @@ function startTyping(){
             .getElementById("askBox")
             .classList
             .remove("hidden");
+
+            letter.scrollTop =
+            letter.scrollHeight;
         }
 
     }, speed);
 }
 
-// ======================
+// =======================
 // YES BUTTON
-// ======================
+// =======================
 
 function sayYes(){
 
@@ -170,10 +172,10 @@ function sayYes(){
     .classList
     .add("hidden");
 
-    const box =
+    const reply =
     document.getElementById("replyBox");
 
-    box.innerHTML = `
+    reply.innerHTML = `
     💖 Darling,<br><br>
 
     You just made this letter complete.<br><br>
@@ -183,15 +185,15 @@ function sayYes(){
 
     I would still choose you.<br><br>
 
-    ☕💑 Forever & Always ♡
+    ☕💕 Forever & Always ♡
     `;
 
-    box.classList.remove("hidden");
+    reply.classList.remove("hidden");
 }
 
-// ======================
-// NO BUTTON RUNAWAY
-// ======================
+// =======================
+// RUNAWAY NO BUTTON
+// =======================
 
 function setupNoButton(){
 
@@ -226,5 +228,28 @@ function setupNoButton(){
     );
 }
 
-// ======================
-// ENTER
+// =======================
+// ENTER KEY SUPPORT
+// =======================
+
+document.addEventListener(
+"keydown",
+(e)=>{
+
+    if(e.key === "Enter"){
+
+        const lock =
+        document.getElementById(
+        "lockScreen"
+        );
+
+        if(
+            lock &&
+            !lock.classList.contains(
+            "hidden"
+            )
+        ){
+            openMail();
+        }
+    }
+});
